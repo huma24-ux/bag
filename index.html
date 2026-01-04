@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BagHub - Premium Bags & Accessories</title>
+    <meta name="description" content="Discover premium quality bags, backpacks, and accessories for every occasion. Free shipping on orders over $50.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#1a202c",
+                        secondary: "#2d3748",
+                        accent: "#d69e2e",
+                        light: "#f7fafc"
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+        .nav-link.active {
+            color: #d69e2e;
+            border-bottom: 2px solid #d69e2e;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                        <i class="fas fa-shopping-bag text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-primary">BagHub</h1>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium transition-colors duration-200" data-page="home">Home</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium transition-colors duration-200" data-page="products">Products</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium transition-colors duration-200" data-page="categories">Categories</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium transition-colors duration-200" data-page="about">About</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium transition-colors duration-200" data-page="contact">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+
+                <!-- Cart & User Icons -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative text-gray-700 hover:text-accent">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+                    </button>
+                    <button class="text-gray-700 hover:text-accent">
+                        <i class="fas fa-user text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden hidden py-4 border-t">
+                <div class="flex flex-col space-y-4">
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium" data-page="home">Home</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium" data-page="products">Products</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium" data-page="categories">Categories</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium" data-page="about">About</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-accent font-medium" data-page="contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <!-- Hero Section -->
+            <section class="mb-16">
+                <div class="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 md:p-12 text-white">
+                    <div class="max-w-2xl">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">Elevate Your Style with Premium Bags</h2>
+                        <p class="text-xl mb-8 opacity-90">Discover our curated collection of high-quality bags for every occasion. From office to adventure, we have the perfect bag for you.</p>
+                        <button class="bg-accent hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-200">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-primary mb-8 text-center">Featured Products</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <img src="https://picsum.photos/400/300?random=1" alt="Premium Leather Backpack" class="w-full h-64 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-primary mb-2">Leather Backpack Pro</h3>
+                            <p class="text-gray-600 mb-4">Water-resistant leather backpack with laptop compartment</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-accent">$129.99</span>
+                                <button class="bg-primary hover:bg-secondary text-white py-2 px-4 rounded-lg transition-colors duration-200">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <img src="https://picsum.photos/400/300?random=2" alt="Minimalist Messenger Bag" class="w-full h-64 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-primary mb-2">Urban Messenger Bag</h3>
+                            <p class="text-gray-600 mb-4">Sleek design with multiple compartments for daily essentials</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-accent">$89.99</span>
+                                <button class="bg-primary hover:bg-secondary text-white py-2 px-4 rounded-lg transition-colors duration-200">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <img src="https://picsum.photos/400/300?random=3" alt="Travel Duffel Bag" class="w-full h-64 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-primary mb-2">Weekend Travel Duffel</h3>
+                            <p class="text-gray-600 mb-4">Spacious duffel bag perfect for weekend getaways</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-2xl font-bold text-accent">$149.99</span>
+                                <button class="bg-primary hover:bg-secondary text-white py-2 px-4 rounded-lg transition-colors duration-200">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="bg-light rounded-2xl p-8 mb-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shipping-fast text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-primary mb-2">Free Shipping</h3>
+                        <p class="text-gray-600">Free shipping on all orders over $50</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-primary mb-2">2-Year Warranty</h3>
+                        <p class="text-gray-600">All products come with 2-year warranty</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-headset text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-primary mb-2">24/7 Support</h3>
+                        <p class="text-gray-600">Round-the-clock customer support</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Products Page -->
+        <div id="products" class="page">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">All Products</h2>
+                <p class="text-gray-600">Browse our complete collection of premium bags and accessories</p>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-700">Filter by:</span>
+                        <select class="border rounded-lg px-4 py-2">
+                            <option>All Categories</option>
+                            <option>Backpacks</option>
+                            <option>Messenger Bags</option>
+                            <option>Travel Bags</option>
+                            <option>Accessories</option>
+                        </select>
+                        <select class="border rounded-lg px-4 py-2">
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest First</option>
+                            <option>Best Selling</option>
+                        </select>
+                    </div>
+                    <div class="text-gray-600">
+                        Showing <span class="font-semibold">12</span> of <span class="font-semibold">48</span> products
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Product items will be generated by JavaScript -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center space-x-2">
+                <button class="w-10 h-10 flex items-center justify-center bg-primary text-white rounded-lg">
+                    1
+                </button>
+                <button class="w-10 h-10 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg">
+                    2
+                </button>
+                <button class="w-10 h-10 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg">
+                    3
+                </button>
+                <button class="w-10 h-10 flex items-center justify-center bg-gray-200 hover:bg-gray-300 rounded-lg">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Categories Page -->
+        <div id="categories" class="page">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-primary mb-4">Shop by Category</h2>
+                <p class="text-gray-600">Find the perfect bag for your needs</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://picsum.photos/400/300?random=4" alt="Backpacks Collection" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Backpacks</h3>
+                        <p class="text-gray-600 mb-4">Perfect for work, school, or travel with laptop compartments</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://picsum.photos/400/300?random=5" alt="Messenger Bags Collection" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Messenger Bags</h3>
+                        <p class="text-gray-600 mb-4">Stylish and functional bags for daily commute</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://picsum.photos/400/300?random=6" alt="Travel Bags Collection" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Travel Bags</h3>
+                        <p class="text-gray-600 mb-4">Durable bags for weekend trips and adventures</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://picsum.photos/400/300?random=7" alt="Laptop Bags Collection" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Laptop Bags</h3>
+                        <p class="text-gray-600 mb-4">Protective bags designed specifically for laptops</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://picsum.photos/400/300?random=8" alt="Accessories Collection" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Accessories</h3>
+                        <p class="text-gray-600 mb-4">Wallets, organizers, and other bag accessories</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden">
+                    <img src="https://picsum.photos/400/300?random=9" alt="Limited Edition Collection" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-primary mb-2">Limited Edition</h3>
+                        <p class="text-gray-600 mb-4">Exclusive designs and special collections</p>
+                        <a href="#" class="text-accent font-semibold hover:underline">
+                            Shop Now <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about" class="page">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-primary mb-8 text-center">About BagHub</h2>
+                
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <div class="flex flex-col md:flex-row items-center mb-8">
+                        <div class="md:w-1/2 mb-6 md:mb-0 md:pr-8">
+                            <img src="https://picsum.photos/500/400?random=10" alt="Our Story" class="rounded-lg w-full" loading="lazy">
+                        </div>
+                        <div class="md:w-1/2">
+                            <h3 class="text-2xl font-bold text-primary mb-4">Our Story</h3>
+                            <p class="text-gray-600 mb-4">
+                                Founded in 2015, BagHub started with a simple mission: to create high-quality, functional, and stylish bags that make everyday life easier. What began as a small workshop has grown into a trusted brand known for exceptional craftsmanship and innovative design.
+                            </p>
+                            <p class="text-gray-600">
+                                We believe that a great bag should not only look good but also serve its purpose perfectly. That's why we pay attention to every detail, from material selection to functional design.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-accent mb-2">5000+</div>
+                            <div class="text-gray-700">Happy Customers</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-accent mb-2">48</div>
+                            <div class="text-gray-700">Countries Served</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-accent mb-2">5</div>
+                            <div class="text-gray-700">Years of Excellence</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-primary mb-4">Our Values</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-light p-6 rounded-lg">
+                                <h4 class="text-xl font-semibold text-primary mb-2">Quality First</h4>
+                                <p class="text-gray-600">We use only premium materials and rigorous quality control to ensure every bag meets our high standards.</p>
+                            </div>
+                            <div class="bg-light p-6 rounded-lg">
+                                <h4 class="text-xl font-semibold text-primary mb-2">Sustainable Practices</h4>
+                                <p class="text-gray-600">We're committed to environmentally friendly manufacturing and ethical sourcing practices.</p>
+                            </div>
+                            <div class="bg-light p-6 rounded-lg">
+                                <h4 class="text-xl font-semibold text-primary mb-2">Customer Focus</h4>
+                                <p class="text-gray-600">Your satisfaction is our priority. We stand behind every product with excellent customer service.</p>
+                            </div>
+                            <div class="bg-light p-6 rounded-lg">
+                                <h4 class="text-xl font-semibold text-primary mb-2">Innovation</h4>
+                                <p class="text-gray-600">We continuously improve our designs based on customer feedback and emerging trends.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-primary mb-8 text-center">Contact Us</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Contact Form -->
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-primary mb-6">Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="name">Full Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Enter your name">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="email">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="subject">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent" placeholder="What is this regarding?">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="message">Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent" placeholder="How can we help you?"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary hover:bg-secondary text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="space-y-8">
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h3 class="text-2xl font-bold text-primary mb-6">Contact Information</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-map-marker-alt text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-primary mb-1">Our Location</h4>
+                                        <p class="text-gray-600">123 Bag Street<br>New York, NY 10001<br>United States</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-phone text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-primary mb-1">Phone Number</h4>
+                                        <p class="text-gray-600">+1 (555) 123-4567<br>Mon-Fri, 9am-6pm EST</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-envelope text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-primary mb-1">Email Address</h4>
+                                        <p class="text-gray-600">support@baghub.com<br>sales@baghub.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Section -->
+                        <div class="bg-white rounded-xl shadow-lg p-8">
+                            <h3 class="text-2xl font-bold text-primary mb-6">Frequently Asked Questions</h3>
+                            <div class="space-y-4">
+                                <div class="border-b pb-4">
+                                    <h4 class="font-semibold text-primary mb-2">What is your return policy?</h4>
+                                    <p class="text-gray-600">We offer a 30-day return policy for all unused items in original packaging.</p>
+                                </div>
+                                <div class="border-b pb-4">
+                                    <h4 class="font-semibold text-primary mb-2">How long does shipping take?</h4>
+                                    <p class="text-gray-600">Standard shipping takes 5-7 business days. Express shipping is 2-3 business days.</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary mb-2">Do you ship internationally?</h4>
+                                    <p class="text-gray-600">Yes, we ship to over 48 countries worldwide.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white mt-16">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                            <i class="fas fa-shopping-bag text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">BagHub</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Premium bags and accessories for every lifestyle. Quality meets style in every stitch.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-white">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors" data-page="home">Home</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors" data-page="products">Products</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors" data-page="categories">Categories</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors" data-page="about">About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Shipping Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Return & Exchange</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Size Guide</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-xl font-semibold mb-4">Stay Updated</h4>
+                    <p class="text-gray-300 mb-4">Subscribe to our newsletter for the latest updates and exclusive offers.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="flex-grow px-4 py-2 rounded-l-lg text-gray-900">
+                        <button class="bg-accent hover:bg-yellow-600 px-4 py-2 rounded-r-lg">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+                <p>&copy; 2024 BagHub. All rights reserved. | Designed with <i class="fas fa-heart text-red-500"></i> for bag lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Define data at the beginning
+        const products = [
+            {
+                "id": 1,
+                "name": "Leather Backpack Pro",
+                "description": "Water-resistant leather backpack with laptop compartment",
+                "price": 129.99,
+                "category": "Backpacks",
+                "image": "https://picsum.photos/400/300?random=11"
+            },
+            {
+                "id": 2,
+                "name": "Urban Messenger Bag",
+                "description": "Sleek design with multiple compartments",
+                "price": 89.99,
+                "category": "Messenger Bags",
+                "image": "https://picsum.photos/400/300?random=12"
+            },
+            {
+                "id": 3,
+                "name": "Weekend Travel Duffel",
+                "description": "Spacious duffel bag for weekend getaways",
+                "price": 149.99,
+                "category": "Travel Bags",
+                "image": "https://picsum.photos/400/300?random=13"
+            },
+            {
+                "id": 4,
+                "name": "Business Laptop Bag",
+                "description": "Professional laptop bag with organizer",
+                "price": 119.99,
+                "category": "Laptop Bags",
+                "image": "https://picsum.photos/400/300?random=14"
+            },
+            {
+                "id": 5,
+                "name": "Canvas Backpack",
+                "description": "Durable canvas backpack for everyday use",
+                "price": 79.99,
+                "category": "Backpacks",
+                "image": "https://picsum.photos/400/300?random=15"
+            },
+            {
+                "id": 6,
+                "name": "Leather Crossbody Bag",
+                "description": "Compact crossbody bag for essentials",
+                "price": 69.99,
+                "category": "Messenger Bags",
+                "image": "https://picsum.photos/400/300?random=16"
+            },
+            {
+                "id": 7,
+                "name": "Rolling Travel Case",
+                "description": "Wheeled travel case with TSA lock",
+                "price": 199.99,
+                "category": "Travel Bags",
+                "image": "https://picsum.photos/400/300?random=17"
+            },
+            {
+                "id": 8,
+                "name": "Premium Leather Wallet",
+                "description": "Genuine leather wallet with card slots",
+                "price": 49.99,
+                "category": "Accessories",
+                "image": "https://picsum.photos/400/300?random=18"
+            },
+            {
+                "id": 9,
+                "name": "Hiking Backpack",
+                "description": "Waterproof hiking backpack with hydration pack",
+                "price": 159.99,
+                "category": "Backpacks",
+                "image": "https://picsum.photos/400/300?random=19"
+            },
+            {
+                "id": 10,
+                "name": "Minimalist Sling Bag",
+                "description": "Compact sling bag for urban adventures",
+                "price": 59.99,
+                "category": "Messenger Bags",
+                "image": "https://picsum.photos/400/300?random=20"
+            },
+            {
+                "id": 11,
+                "name": "Gym Duffel Bag",
+                "description": "Ventilated duffel bag for gym gear",
+                "price": 89.99,
+                "category": "Travel Bags",
+                "image": "https://picsum.photos/400/300?random=21"
+            },
+            {
+                "id": 12,
+                "name": "Tablet Sleeve",
+                "description": "Protective sleeve for tablets",
+                "price": 39.99,
+                "category": "Accessories",
+                "image": "https://picsum.photos/400/300?random=22"
+            }
+        ];
+
+        // Page navigation functionality
+        function navigateToPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the corresponding nav link
+            const activeLink = document.querySelector(`.nav-link[data-page="${pageId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Generate product cards for products page
+        function generateProductCards() {
+            const productsGrid = document.querySelector('#products .grid');
+            if (!productsGrid) return;
+            
+            productsGrid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card bg-white rounded-xl shadow-lg overflow-hidden';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-semibold text-primary">${product.name}</h3>
+                            <span class="text-sm bg-gray-100 text-gray-600 px-2 py-1 rounded">${product.category}</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">${product.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-accent">$${product.price.toFixed(2)}</span>
+                            <button class="bg-primary hover:bg-secondary text-white py-2 px-4 rounded-lg transition-colors duration-200 add-to-cart" data-id="${product.id}">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+            
+            // Add event listeners to add-to-cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+                    const product = products.find(p => p.id == productId);
+                    if (product) {
+                        alert(`Added ${product.name} to cart!`);
+                    }
+                });
+            });
+        }
+
+        // Initialize mobile menu
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        icon.className = 'fas fa-bars text-2xl';
+                    } else {
+                        icon.className = 'fas fa-times text-2xl';
+                    }
+                });
+            }
+        }
+
+        // Initialize contact form
+        function initContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Simple validation
+                    if (!name || !email || !subject || !message) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+                    
+                    // In a real application, you would send this data to a server
+                    alert('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate product cards
+            generateProductCards();
+            
+            // Initialize mobile menu
+            initMobileMenu();
+            
+            // Initialize contact form
+            initContactForm();
+            
+            // Set up navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    navigateToPage(pageId);
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        const menuBtnIcon = document.querySelector('#mobileMenuBtn i');
+                        menuBtnIcon.className = 'fas fa-bars text-2xl';
+                    }
+                });
+            });
+            
+            // Set up logo click to go home
+            document.querySelector('h1').addEventListener('click', function(e) {
+                e.preventDefault();
+                navigateToPage('home');
+            });
+            
+            // Initialize cart functionality
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-id');
+                    const product = products.find(p => p.id == productId);
+                    if (product) {
+                        alert(`Added ${product.name} to cart!`);
+                    }
+                });
+            });
+            
+            // Set active page based on URL hash or default to home
+            const hash = window.location.hash.substring(1);
+            const validPages = ['home', 'products', 'categories', 'about', 'contact'];
+            const initialPage = validPages.includes(hash) ? hash : 'home';
+            navigateToPage(initialPage);
+        });
+    </script>
+</body>
+</html>
